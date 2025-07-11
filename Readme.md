@@ -131,6 +131,10 @@ python main.py --cli input1.pdf input2.pdf --output outdir/ --recursive --compre
 | Metadata still present after processing | Try opening PDF in another viewer; some readers cache metadata                   |
 | Config file warning                     | The app will use defaults if config is corrupt or missing                        |
 | Settings seem wrong                     | Use the 'Reset' button to return all settings to their default values            |
+| ModuleNotFoundError: No module named 'pikepdf' | Install dependencies: `pip install -r requirements.txt` or create virtual environment |
+| pip not found                          | Install pip: `sudo pacman -S python-pip` (Arch) or `sudo apt install python3-pip` (Ubuntu) |
+| Externally managed environment error    | Create virtual environment: `python -m venv .venv && source .venv/bin/activate` |
+| Fish shell activation error             | Use fish-specific activation: `source .venv/bin/activate.fish` |
 
 ---
 
