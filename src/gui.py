@@ -733,14 +733,22 @@ class AdvancedPDFMetadataRemover:
         links_frame = ttk.Frame(main_frame)
         links_frame.pack(anchor="center", pady=(0,6))
         def open_homepage(event=None):
-            import webbrowser
-            webbrowser.open_new("https://github.com/HelllGuest/advanced-pdf_metadata_remover")
+            try:
+                import webbrowser
+                webbrowser.open_new("https://github.com/HelllGuest/advanced-pdf_metadata_remover")
+            except Exception as e:
+                # Handle sandbox restrictions or other browser opening issues
+                messagebox.showinfo("Link", "Project Home Page: https://github.com/HelllGuest/advanced-pdf_metadata_remover\n\nCopy this URL to your browser if it doesn't open automatically.")
         homepage = tk.Label(links_frame, text="Project Home Page", font=("Segoe UI", 10, "underline"), fg="#0066cc", cursor="hand2", anchor="center", justify="center")
         homepage.pack(side="left", padx=(0, 16))
         homepage.bind("<Button-1>", open_homepage)
         def open_qpdf(event=None):
-            import webbrowser
-            webbrowser.open_new("https://qpdf.sourceforge.io/")
+            try:
+                import webbrowser
+                webbrowser.open_new("https://qpdf.sourceforge.io/")
+            except Exception as e:
+                # Handle sandbox restrictions or other browser opening issues
+                messagebox.showinfo("Link", "QPDF Homepage: https://qpdf.sourceforge.io/\n\nCopy this URL to your browser if it doesn't open automatically.")
         qpdf_credit = tk.Label(links_frame, text="QPDF by Jay Berkenbilt", font=("Segoe UI", 9, "underline"), anchor="center", justify="center", fg="#0066cc", cursor="hand2")
         qpdf_credit.pack(side="left")
         qpdf_credit.bind("<Button-1>", open_qpdf)

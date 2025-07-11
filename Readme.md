@@ -135,6 +135,7 @@ python main.py --cli input1.pdf input2.pdf --output outdir/ --recursive --compre
 | pip not found                          | Install pip: `sudo pacman -S python-pip` (Arch) or `sudo apt install python3-pip` (Ubuntu) |
 | Externally managed environment error    | Create virtual environment: `python -m venv .venv && source .venv/bin/activate` |
 | Fish shell activation error             | Use fish-specific activation: `source .venv/bin/activate.fish` |
+| Sandbox warnings on Linux              | Run with stderr redirection: `python main.py 2>/dev/null` |
 
 ---
 

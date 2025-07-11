@@ -90,7 +90,12 @@ class PDFProcessor:
                 self.update_status(f"Downloading QPDF from {url} ...")
                 if not os.path.exists(bin_dir):
                     os.makedirs(bin_dir)
-                urllib.request.urlretrieve(url, zip_path)
+                # Suppress sandbox warnings for urllib
+                try:
+                    urllib.request.urlretrieve(url, zip_path)
+                except Exception as download_error:
+                    self.log(f"QPDF download failed: {download_error}", level="error")
+                    return None
                 with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                     # Extract only the bin/ files from the archive to bin_dir
                     for member in zip_ref.namelist():
@@ -153,9 +158,13 @@ class PDFProcessor:
                     return False
                 compression_flag = self.get_compression_flag(compression_level)
                 try:
+                    # Suppress sandbox warnings for subprocess
+                    env = os.environ.copy()
+                    env['QPDF_DISABLE_SANDBOX'] = '1'  # Disable QPDF sandbox warnings
+                    
                     result = subprocess.run([
                         qpdf_path, *compression_flag, '--replace-input', output_path
-                    ], capture_output=True, text=True)
+                    ], capture_output=True, text=True, env=env)
                     if result.returncode != 0:
                         raise RuntimeError(f"QPDF compression failed: {result.stderr.strip()}")
                 except Exception as e:

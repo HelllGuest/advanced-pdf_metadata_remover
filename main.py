@@ -1,6 +1,12 @@
 import sys
 import os
 import argparse
+
+# Suppress sandbox warnings on Linux
+if os.name == 'posix':
+    os.environ['QPDF_DISABLE_SANDBOX'] = '1'
+    os.environ['PYTHONWARNINGS'] = 'ignore::UserWarning'
+
 from src.gui import run_app
 from src.processing import PDFProcessor
 from src.utils import load_config
